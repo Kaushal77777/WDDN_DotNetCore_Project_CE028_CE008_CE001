@@ -1,0 +1,650 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Covid Vaccine Scheduler</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<style>
+
+    @@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700|Roboto:300,400,400i,500,700');
+    /* font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto Slab', serif; */
+
+    /*
+    ℘ąŋƙąʝ ɖɧıɱąŋ
+    */
+
+    body {
+        background: #fff;
+        color: #414141;
+        font-family: 'Roboto', sans-serif;
+        font-size: 16px;
+        overflow-x: hidden;
+        -webkit-text-stroke: rgba(255, 255, 255, 0.01) 0.1px;
+        -webkit-font-smoothing: antialiased !important;
+    }
+
+    a {
+        text-decoration: none;
+        -ms-transition: all 0.3s ease-in;
+        -webkit-transition: all 0.3s ease-in;
+        transition: all 0.3s ease-in;
+    }
+
+        a:hover,
+        a:focus,
+        a:active {
+            outline: medium none;
+            text-decoration: none;
+        }
+
+    *:focus {
+        outline: none;
+    }
+
+    img {
+        max-width: 100%, height: auto;
+    }
+
+    strong,
+    b {
+        font-weight: 700;
+    }
+
+    i,
+    em {
+        font-style: italic;
+    }
+
+    .clear {
+        border: 0;
+        clear: both;
+        height: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+        font-weight: normal;
+        margin: 0;
+    }
+
+    input,
+    textarea {
+        -webkit-appearance: none;
+        border-radius: 0;
+    }
+
+    html,
+    body {
+        height: 100%;
+    }
+
+    /**** NAV ****/
+    nav.navbar-default {
+        background-color: rgba(0, 0, 0, 0.415);
+        border-color: rgba(0, 0, 0, 0.05);
+        -ms-transition: all 0.3s ease-in-out;
+        -webkit-transition: all 0.3s ease-in-out;
+        transition: all 0.3s ease-in-out;
+    }
+
+        nav.navbar-default.affix {
+            background-color: #222;
+            -ms-transition: all 0.3s ease-in-out;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        nav.navbar-default .navbar-brand {
+            color: #fff;
+            font-size: 24px;
+            text-transform: uppercase;
+            font-family: 'Roboto', sans-serif;
+        }
+
+            nav.navbar-default .navbar-brand:focus, nav.navbar-default .navbar-brand:hover {
+                color: #fff !important;
+                background-color: transparent;
+            }
+
+        nav.navbar-default .navbar-nav > li > a {
+            color: #fff;
+            font-family: 'Roboto', sans-serif;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+            nav.navbar-default .navbar-nav > li > a:focus,
+            nav.navbar-default .navbar-nav > li > a:hover {
+                color: #F05F40;
+                background-color: transparent;
+            }
+
+        nav.navbar-default .navbar-nav li a.active,
+        nav.navbar-default .navbar-nav li a.active:focus,
+        nav.navbar-default .navbar-nav li a.active:hover {
+            color: #F05F40;
+            background-color: transparent;
+        }
+
+
+    /**** NAV END ****/
+    /**** HEADER ****/
+    header {
+        min-height: 100%;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+        header:after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 0;
+        }
+
+        header,
+        header .header-content {
+            position: relative;
+            width: 100%;
+            text-align: center;
+        }
+
+            header .header-content {
+                position: absolute;
+                top: 50%;
+                -webkit-transform: translateY(-50%);
+                transform: translateY(-50%);
+                padding: 0 50px;
+                z-index: 10;
+            }
+
+                header .header-content .header-content-inner {
+                    width: 100%;
+                    max-width: 1000px;
+                    margin: 0 auto;
+                    text-shadow: 2px 3px 6px rgba(0, 0, 0, 0.41);
+                }
+
+    h1, h2, h3, h4 {
+        font-family: 'Roboto Slab', serif;
+    }
+
+    .header-content-inner h1 {
+        font-size: 48px;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        color: #fff;
+        letter-spacing: 0.05em;
+    }
+
+        .header-content-inner h1:after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            margin: 20px auto 0;
+            background: #F05F40;
+        }
+
+    .header-content-inner p {
+        font-size: 22px;
+        line-height: 1.8;
+        color: #e4e4e4;
+    }
+    /**** HEADER END ****/
+    /**** ABOUT ****/
+    .bg-color {
+        background: #ecb7ab;
+    }
+
+    section {
+        padding: 80px 0;
+        position: relative;
+        text-align: center;
+    }
+
+    .about-section h3 {
+        font-size: 36px;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        color: #fff;
+        letter-spacing: 0.05em;
+    }
+
+        .about-section h3:after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            margin: 20px auto 0;
+            background: #c34d34;
+        }
+
+    .about-section p {
+        font-size: 18px;
+        line-height: 1.8;
+        color: #fff;
+        margin-bottom: 15px;
+    }
+
+    .btn-default-new {
+        background: #c34d34;
+        border-radius: 30px;
+        border: solid 3px #c34d34;
+        color: #ffffff;
+        font-size: 18px;
+        text-transform: capitalize;
+        font-family: 'Roboto', sans-serif;
+        padding: 0 25px;
+        line-height: 3.1;
+        margin-top: 30px;
+        letter-spacing: 0.05em;
+        -ms-transition: all 0.6s ease-in-out;
+        -webkit-transition: all 0.6s ease-in-out;
+        transition: all 0.6s ease-in-out;
+    }
+
+        .btn-default-new:hover, .btn-default-new:focus {
+            background: #fff;
+            color: #c34d34;
+            border-color: #c34d34;
+        }
+    /**** ABOUT END ****/
+    /**** SERVICE ****/
+
+    .service-section h3 {
+        font-size: 36px;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        color: #222;
+        letter-spacing: 0.05em;
+    }
+
+        .service-section h3:after {
+            content: "";
+            display: block;
+            width: 80px;
+            height: 3px;
+            margin: 20px auto 0;
+            background: #F05F40;
+        }
+
+    .service-items .icon {
+        color: #F05F40;
+        font-size: 36px;
+        display: block;
+        width: 100px;
+        height: 100px;
+        text-align: center;
+        border-radius: 100%;
+        border: solid 2px #F05F40;
+        margin: 0 auto 30px;
+        line-height: 98px;
+    }
+
+    .service-items h4 {
+        font-size: 22px;
+        margin-bottom: 20px;
+        text-transform: capitalize;
+        color: #F05F40;
+    }
+
+        .service-items h4 a {
+            color: #222;
+        }
+
+            .service-items h4 a:hover {
+                color: #F05F40;
+            }
+
+    .service-items p {
+        font-size: 16px;
+        line-height: 1.6;
+        color: #414141;
+        margin-bottom: 15px;
+    }
+
+    /**** SERVICE END ****/
+    /**** PORTFOLIO ****/
+
+    .portfolio-section {
+        padding: 0;
+    }
+
+        .portfolio-section .portfolio-section-inner {
+            display: table;
+            table-layout: fixed;
+            width: 100%;
+            max-width: 2000px;
+        }
+
+    .portfolio-section-inner .portfolio-section-row {
+        display: table-row;
+        width: 100%;
+    }
+
+    .portfolio-section-inner .portfolio-section-data {
+        display: table-cell;
+        width: 33.33%;
+        vertical-align: middle;
+        height: 420px;
+        background-position: center center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        position: relative;
+        overflow: hidden;
+    }
+
+        .portfolio-section-inner .portfolio-section-data .portfolio-section-text {
+            position: absolute;
+            top: 150%;
+            ;
+            bottom: 0;
+            right: 0;
+            left: 0;
+            background: rgba(0,0,0,0.8);
+            margin: auto;
+            -ms-transition: all 0.3s ease-in-out;
+            -webkit-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .portfolio-section-inner .portfolio-section-data:hover .portfolio-section-text {
+            top: 0;
+        }
+
+    .portfolio-section-text .portfolio-section-text-inner {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        left: 20px;
+        -webkit-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .portfolio-section-text p {
+        font-size: 28px;
+        line-height: 1.6;
+        color: #fff;
+    }
+
+    .portfolio-section-text a {
+        color: #F05F40;
+        font-size: 14px;
+    }
+
+        .portfolio-section-text a:hover {
+            color: #fff;
+        }
+    /**** PORTFOLIO ****/
+    /**** FOOTER ****/
+
+    footer {
+        background: #222;
+        padding: 80px 0;
+        position: relative;
+        text-align: center;
+    }
+
+        footer h3 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-transform: capitalize;
+            color: #fff;
+            letter-spacing: 0.05em;
+        }
+
+            footer h3:after {
+                content: "";
+                display: block;
+                width: 80px;
+                height: 3px;
+                margin: 20px auto 0;
+                background: #F05F40;
+            }
+
+        footer p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #adadad;
+        }
+
+    .gap {
+        display: block;
+        margin-top: 50px;
+    }
+
+    footer span.glyphicon {
+        color: #adadad;
+        font-size: 28px;
+        display: block;
+        margin: 0 auto 30px;
+    }
+
+    footer a {
+        color: #adadad;
+    }
+
+        footer a:hover {
+            color: #F05F40;
+        }
+</style>
+
+<body data-spy="scroll" data-target="#myScrollspy">
+    <nav class="navbar navbar-default navbar-fixed-top" data-spy="affix" data-offset-top="205">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button> <a class="navbar-brand" href="#">Covid Vaccine Scheduler</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    @*<li><a href="/registration.aspx">Registration</a></li>*@
+                    <li><a asp-controller="User" asp-action="Registration">Registration</a></li>
+                    <li><a asp-controller="User" asp-action="Login">Login</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#portfolio">News</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </nav>
+    <header style="background-image:url('https://images.unsplash.com/photo-1625144094117-6612bbbe0a33?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80');">
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1>Book your vaccine slot now!</h1>
+                <p>These [COVID] vaccines are safer than aspirin....Vaccines still remain the number one, two, three, four, and five tool to stop this pandemic.</p>
+            </div>
+        </div>
+    </header>
+    <section class="about-section bg-color" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+                    <h3>About</h3>
+                    <p>A cloth mask surely can give you some protection. But it's not the kind of protection that you'll get when you use a much more effective mask. We have not talked about that nearly enough</p>
+                    <p>We have people dying needlessly that don’t have to because they could have been vaccinated and protected. Of the 700,000 people that have died in this country from COVID, 400,000 have died since vaccines have been available. Many of those people could have been protected</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--<section class="service-section" id="services">
+        <div class="container">
+            <h3>News</h3>
+
+
+        </div>
+    </section>-->
+
+    <section class="portfolio-section" id="portfolio">
+        <div class="portfolio-section-inner">
+            <div class="portfolio-section-row">
+                <div class="portfolio-section-data" style="background-image:url('https://images.unsplash.com/photo-1593131492215-67b479a3d915?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1113&q=80')">
+                    <div class="portfolio-section-text">
+                        <div class="portfolio-section-text-inner">
+                            <p>Mask</p>
+                            <a href="#">
+                                Wearing a mask is not only important, it’s life-saving.
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-section-data" style="background-image:url('https://images.unsplash.com/photo-1611942874599-ce6185149d5c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80')">
+                    <div class="portfolio-section-text">
+                        <div class="portfolio-section-text-inner">
+                            <p>Sanitation</p>
+                            <a href="#">No innovation in the past 200 years has done more to save lives and improve health than the sanitation revolution triggered by invention of the toilet. But it did not go far enough. It only reached one-third of the world.</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-section-data" style="background-image:url('https://images.unsplash.com/photo-1601198403010-a16c2c7ba8db?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=735&q=80')">
+                    <div class="portfolio-section-text">
+                        <div class="portfolio-section-text-inner">
+                            <p>Social Distance</p>
+                            <a href="#">We want to be social, and yet the best, safest thing we can do is to stay home and keep our distance from friends, family, and fellow humans—at least 6 feet to be exact! For some of us, social distancing is right up our alleys</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="portfolio-section-row">
+
+                <div class="portfolio-section-data" style="background-image:url('https://images.unsplash.com/photo-1585331505473-7586f9cb0854?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80')">
+                    <div class="portfolio-section-text">
+                        <div class="portfolio-section-text-inner">
+                            <p>Lockdown</p>
+                            <a href="#">One full year into the COVID-19 pandemic, our world has faced a tsunami of suffering. So many lives have been lost. Economies have been upended and societies left reeling. The most vulnerable have suffered the most. Those left behind are being left even further behind. </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-section-data" style="background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRySVpy71VEMz2X9NActsSbwnlAeuclLa_LWw&usqp=CAU')">
+                    <div class="portfolio-section-text">
+                        <div class="portfolio-section-text-inner">
+                            <p>Doctors</p>
+                            <a href="#">The year 2020-21 belongs to doctors and the healthcare workers who are risking their lives to fight the lethal, invisible virus Covid-19. While India stays at home to curb the spread of the pandemic; armed with masks, gloves, and protective gears, the medical community is working tirelessly round the clock amid mounting pressure, fear of being infected, and harassment and discrimination.</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portfolio-section-data" style="background-image:url('https://images.unsplash.com/photo-1604572636606-bb3589cbf51c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1074&q=80')">
+                    <div class="portfolio-section-text">
+                        <div class="portfolio-section-text-inner">
+                            <p>Covid-19</p>
+                            <a href="#">During the initial surge of the COVID-19 pandemic, family members were often separated from their loved ones admitted to intensive care units (ICUs), with a potential for negative experiences and psychological burden.</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12">
+                    <h3>For any help and advice</h3>
+                    <p>Ready to book your vaccine slot nearby? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                    <div class="gap">
+                        <div class="col-sm-6 col-xs-12">
+                            <span class="glyphicon glyphicon-earphone"></span>
+                            <a href="tel:123456789">123-456-789</a>
+                        </div>
+                        <div class="col-sm-6 col-xs-12">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                            <a href="mailto:get@bootstrap.com">covidvaccine@gmail.com</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </footer>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <!-- Latest compiled and minified JavaScript -->
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $(document).on("scroll", onScroll);
+            //smoothscroll
+            $('.navbar-nav li a[href^="#"]').on('click', function (e) {
+                e.preventDefault();
+                $(document).off("scroll");
+                $('.navbar-nav li a').each(function () {
+                    $(this).removeClass('active');
+                })
+                $(this).addClass('active');
+                var target = this.hash
+                    , menu = target;
+                target = $(target);
+                $('html, body').stop().animate({
+                    'scrollTop': target.offset().top + 2
+                }, 1000, 'swing', function () {
+                    window.location.hash = target;
+                    $(document).on("scroll", onScroll);
+                });
+            });
+        });
+
+        function onScroll(event) {
+            var scrollPos = $(document).scrollTop();
+            $('.navbar-nav li a').each(function () {
+                var currLink = $(this);
+                var refElement = $(currLink.attr("href"));
+                if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
+                    $('.navbar-nav li a').removeClass("active");
+                    currLink.addClass("active");
+                }
+                else {
+                    currLink.removeClass("active");
+                }
+            });
+        }
+    </script>
+</body>
+
+
+</html>

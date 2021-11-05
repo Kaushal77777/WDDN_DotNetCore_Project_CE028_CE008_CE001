@@ -1,0 +1,186 @@
+﻿@model Covid_Vaccination_core.Models.User
+
+@{
+    var phsession = @httpContextAccessor.HttpContext.Session.GetString("phoneno");
+}
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" href="Content/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <!-- Navbar content -->
+        <a class="navbar-brand" href="/default.html">Co-Win</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a asp-controller="User" asp-action="Login" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="User" asp-action="Registration" class="nav-link">Registration</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Slot" asp-action="Book" class="nav-link">Book Your Slot</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Slot" asp-action="Check" class="nav-link">Check Status</a>
+                </li>
+            </ul>
+        </div>
+        @if (phsession != null)
+        {
+            <label id="navuser" class="text-warning mr-5">Welcome @ViewBag.user.Name</label>
+        }
+        else
+        {
+            <label id="navuser" class="text-warning mr-5">Please Login</label>
+        }
+        <input type="button" value="Logout" Text="Logout" class="btn btn-outline-success my-2 my-sm-0" onclick="location.href='@Url.Action("LogOut", "Home")'" />
+    </nav>
+
+    <header class="jumbotron" style="background-color:dodgerblue;">
+        <h1 class="text-center display-3" id="title"> Registration Form </h1>
+        <div class="container">
+            <p id="description" class="lead">
+                KEEP SAFE DISTANCE FOR COVID RESISTANCE CLEAN HANDS AND FACE MASK CORONA WILL LEAVE BEFORE YOU ASK.
+            </p>
+        </div>
+    </header>
+
+    <div class="container">
+
+        <h2 class="display-5"> Registration Info </h2>
+
+        <Form asp-controller="User" asp-action="Registration" method="post">
+
+            <!-- TEXTB0X: FIRST NAME -->
+            <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="form-group d-flex">
+                <input asp-for="Name" class="form-control" type="text" id="Name" placeholder="Full Name">
+            </div>
+
+
+            <!-- TEXTB0X: Adhar Number -->
+            <span asp-validation-for="Adharno" class="text-danger"></span>
+            <div class="form-group d-flex">
+                <input asp-for="Adharno" class="form-control" type="text" id="Adharno" placeholder="Adhar Number">
+            </div>
+
+
+            <!-- TEXTB0X: EMAIL -->
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <div class="form-group d-flex">
+                <input asp-for="Email" class="form-control" type="text" id="Email" placeholder="Email">
+            </div>
+
+            <!-- TEXTB0X: Phone Number -->
+            <span asp-validation-for="Phoneno" class="text-danger"></span>
+            <div class="form-group d-flex">
+                <input asp-for="Phoneno" class="form-control" type="text" id="Phoneno" placeholder="Phone Number">
+            </div>
+
+
+
+            <!-- GENDER -->
+            <span asp-validation-for="Gender" class="text-danger"></span>
+            <div class="form-group">
+                <label for="gender">Gender</label><br />
+                <input asp-for="Gender" type="radio" id="male" name="gender" value="Male">
+                <label for="male">Male</label><br>
+                <input asp-for="Gender" type="radio" id="female" name="gender" value="Female">
+                <label for="female">Female</label><br>
+            </div>
+
+            <!-- BIRTHDATE -->
+            <label for="birthday">Birth Date</label>
+            <div class="form-group d-flex">
+
+                <!-- DROPDOWN: Month -->
+                <select asp-for="Bmonth" name="Bmonth" id="Bmonth" class="form-control col-sm-4">
+                    <option value="1">Jan</option>
+                    <option value="2">Feb</option>
+                    <option value="3">Mar</option>
+                    <option value="4">Apr</option>
+                    <option value="5">May</option>
+                    <option value="6">Jun</option>
+                    <option value="7">Jul</option>
+                    <option value="8">Aug</option>
+                    <option value="9">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                </select>
+
+                <!-- DROPDOWN: Date -->
+                <select asp-for="Bday" name="Bday" id="Bday" class="form-control col-sm-4">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                </select>
+
+                <!-- DROPDOWN: Year -->
+                <select asp-for="Byear" name="Byear" id="Byear" class="form-control col-sm-4">
+                    <option value="1991">1991</option>
+                    <option value="1992">1992</option>
+                    <option value="1993">1993</option>
+                    <option value="1994">1994</option>
+                    <option value="1995">1995</option>
+                    <option value="1996">1996</option>
+                    <option value="1997">1997</option>
+                    <option value="1998">1998</option>
+                    <option value="1999">1999</option>
+                    <option value="2000">2000</option>
+                    <option value="2001">2001</option>
+                </select>
+            </div>
+
+            <!-- TEXTB0X: Password -->
+            <span asp-validation-for="Password" class="text-danger"></span>
+            <div asp-for="Password" class="form-group d-flex">
+                <input asp-for="Password" class="form-control" type="password" id="Password" placeholder="Password">
+            </div>
+            <br>
+            <!-- BUTTON: SUBMIT -->
+            <button type="submit" class="btn btn-primary mb-5">Register</button>
+        </Form>
+    </div>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</body>
+</html>

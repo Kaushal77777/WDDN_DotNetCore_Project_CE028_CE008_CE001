@@ -1,0 +1,178 @@
+﻿@model Covid_Vaccination_core.Models.Slot
+
+@{
+    var phsession = @httpContextAccessor.HttpContext.Session.GetString("phoneno");
+}
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <!-- Navbar content -->
+        <a class="navbar-brand" href="/default.html">Co-Win</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a asp-controller="User" asp-action="Login" class="nav-link">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="User" asp-action="Registration" class="nav-link">Registration</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Slot" asp-action="Book" class="nav-link">Book Your Slot</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-controller="Slot" asp-action="Check" class="nav-link">Check Status</a>
+                </li>
+            </ul>
+        </div>
+        @if (phsession != null)
+        {
+            <label id="navuser" class="text-warning mr-5">Welcome @ViewBag.user.Name</label>
+        }
+        else
+        {
+            <label id="navuser" class="text-warning mr-5">Please Login</label>
+        }
+        <input type="button" value="Logout" Text="Logout" class="btn btn-outline-success my-2 my-sm-0" onclick="location.href='@Url.Action("LogOut", "Home")'" />
+    </nav>
+
+
+    <header class="jumbotron" style="background-color:#cc3399;">
+        <h1 class="text-center display-3" id="title"> Keep COVID Away, by one step </h1>
+        <div class="container">
+            <p id="description" class="lead">
+                STRENGTHENS YOUR LUNGS, BY DEEP BREATHING CORONA VIRUS WILL RUN, WITHOUT CEASING.
+            </p>
+        </div>
+
+    </header>
+
+    <div class="container">
+
+        <h2 class="display-5"> Booking Info </h2>
+
+        <Form asp-controller="Slot" asp-action="Book" method="post">
+
+            <!-- TEXTB0X: CITY -->
+            <span asp-validation-for="City" class="text-danger"></span>
+            <div class="form-group d-flex">
+                <input asp-for="City" class="form-control" type="text" id="City" placeholder="City">
+            </div>
+
+            <!-- TEXTB0X: STATE -->
+            <span asp-validation-for="State" class="text-danger"></span>
+            <div class="form-group d-flex">
+                <input asp-for="State" class="form-control" type="text" id="State" placeholder="State">
+            </div>
+
+            <!-- TEXTB0X: PIN CODE -->
+            <span asp-validation-for="Pinno" class="text-danger"></span>
+            <div class="form-group d-flex">
+                <input asp-for="Pinno" class="form-control" type="text" id="Pinno" placeholder="Pin Number">
+            </div>
+
+
+            <!-- DOSE NUMBER -->
+            <span asp-validation-for="Doseno" class="text-danger"></span>
+            <div class="form-group">
+                <label for="Doseno">Dose Number</label><br />
+                <input asp-for="Doseno" type="radio" id="dose1" name="Doseno" value="1">
+                <label for="dose1">Dose 1</label><br>
+                <input asp-for="Doseno" type="radio" id="dose2" name="Doseno" value="2">
+                <label for="dose2">Dose 2</label><br>
+            </div>
+
+
+            <!-- DATE -->
+            <label for="date">Slot Date</label>
+            <div class="form-group d-flex">
+
+                <!-- DROPDOWN: Month -->
+                <select asp-for="Month" name="Month" id="Month" class="form-control col-sm-4">
+                    <option value="1">Jan</option>
+                    <option value="2">Feb</option>
+                    <option value="3">Mar</option>
+                    <option value="4">Apr</option>
+                    <option value="5">May</option>
+                    <option value="6">Jun</option>
+                    <option value="7">Jul</option>
+                    <option value="8">Aug</option>
+                    <option value="9">Sep</option>
+                    <option value="10">Oct</option>
+                    <option value="11">Nov</option>
+                    <option value="12">Dec</option>
+                </select>
+
+                <!-- DROPDOWN: Date -->
+                <select asp-for="Day" name="Day" id="Day" class="form-control col-sm-4">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                    <option value="25">25</option>
+                    <option value="26">26</option>
+                    <option value="27">27</option>
+                    <option value="28">28</option>
+                    <option value="29">29</option>
+                    <option value="30">30</option>
+                    <option value="31">31</option>
+                </select>
+
+            </div>
+
+            <!-- TEXTB0X: Vaccine Type -->
+            <label for="vaccineType">Vaccine Type</label>
+            <div class="form-group d-flex">
+                <select asp-for="VaccineType" name="VaccineType" id="VaccineType" class="form-control col-sm-4">
+                    <option value="Covaxin">Covaxin</option>
+                    <option value="Covishield">Covishield</option>
+                </select>
+            </div>
+
+
+            <!-- TEXTB0X: SLOT TIME -->
+            <label for="dropdown_time">Slot Time</label>
+            <div class="form-group d-flex">
+                <select asp-for="Time" name="Time" id="Time" class="form-control col-sm-4">
+                    <option value="09:00AM - 10:00AM">09:00AM - 10:00AM</option>
+                    <option value="10:00AM - 11:00AM">10:00AM - 11:00AM</option>
+                    <option value="11:00AM - 12:00PM">11:00AM - 12:00PM</option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mb-5">Book</button>
+        </Form>
+
+    </div>
+</body>
+</html>
